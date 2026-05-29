@@ -1,21 +1,113 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#fdf6ee">
-<title>Equipment — Ikebukuro 2Chōme808
-池袋2丁目808</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/site.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Equipment — Ikebukuro 2Chōme808</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+  :root { --accent: #d4651e; --accent-light: #fcd3ae; --cream: #fdf6ee; --text-dark: #3a3232; --text-mid: #6b5a5a; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Nunito', sans-serif; background: var(--cream); color: var(--text-dark); min-height: 100vh; }
+  .top-bar { background: linear-gradient(135deg, var(--accent) 0%, color-mix(in srgb, var(--accent) 70%, black) 100%); padding: 16px 20px; display: flex; align-items: center; gap: 14px; position: sticky; top: 0; z-index: 10; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
+  .back-btn { background: rgba(255,255,255,0.25); border: none; border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: #fff; text-decoration: none; flex-shrink: 0; }
+  .top-title { font-family: 'Pacifico', cursive; font-size: 1.3rem; color: #fff; text-shadow: 1px 2px 4px rgba(0,0,0,0.2); flex: 1; }
+  .top-emoji { font-size: 1.8rem; }
+  .content { padding: 20px 16px 40px; max-width: 640px; margin: 0 auto; }
+  .lang-bar { display: flex; justify-content: center; gap: 6px; padding: 10px 16px; flex-wrap: wrap; }
+  .lang-btn { border: 2px solid var(--accent-light); background: rgba(255,255,255,0.92); border-radius: 50px; padding: 4px 9px; font-family: 'Nunito', sans-serif; font-size: 0.72rem; font-weight: 800; color: var(--text-mid); cursor: pointer; transition: all 0.2s; }
+  .lang-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .lang-btn:hover:not(.active) { border-color: var(--accent); color: var(--accent); }
+  .eq-card { background: #fff; border-radius: 16px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 12px rgba(120,80,60,0.08); }
+  .eq-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .eq-icon { font-size: 2rem; }
+  .eq-title { font-family: 'Pacifico', cursive; font-size: 1.05rem; color: var(--accent); }
+  .btn-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .btn-item { display: flex; gap: 10px; align-items: center; background: #fff8f0; border-radius: 10px; padding: 10px 14px; }
+  .btn-num { background: var(--accent-light); color: var(--accent); border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.8rem; flex-shrink: 0; }
+  .btn-text { font-size: 0.9rem; line-height: 1.5; }
+  .btn-sub { font-size: 0.78rem; color: var(--text-mid); margin-top: 2px; }
+  .notion-link { display: flex; align-items: center; gap: 8px; background: var(--accent-light); color: var(--accent); font-weight: 800; font-size: 0.85rem; border-radius: 12px; padding: 10px 14px; margin-top: 12px; text-decoration: none; }
+  .back-footer { text-align: center; margin-top: 28px; padding-bottom: 20px; }
+  .back-footer a { display: inline-flex; align-items: center; gap: 8px; color: var(--accent); font-weight: 700; text-decoration: none; background: var(--accent-light); padding: 12px 24px; border-radius: 50px; }
+</style>
 </head>
 <body>
-<main>
-<div class="top"><a class="back" href="../">←</a><span class="top-emoji" aria-hidden="true">🛠️</span><h1 class="top-title">Equipment</h1></div><article class="content"><p>設備について</p>
-<p>Content coming soon.</p></article>
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('en',this)">🇬🇧 EN</button>
+  <button class="lang-btn" onclick="setLang('ja',this)">🇯🇵 JA</button>
+  <button class="lang-btn" onclick="setLang('zh',this)">🇨🇳 ZH</button>
+  <button class="lang-btn" onclick="setLang('ko',this)">🇰🇷 KO</button>
+  <button class="lang-btn" onclick="setLang('fr',this)">🇫🇷 FR</button>
+  <button class="lang-btn" onclick="setLang('es',this)">🇪🇸 ES</button>
+</div>
+<div class="top-bar">
+  <a href="../" class="back-btn">←</a>
+  <span class="top-emoji">🛠️</span>
+  <div class="top-title" data-i18n="pageTitle">Equipment</div>
+</div>
+<div class="content">
 
-</main>
+  <!-- TV Remote -->
+  <div class="eq-card">
+    <div class="eq-header">
+      <span class="eq-icon">📺</span>
+      <div class="eq-title" data-i18n="tvTitle">TV Remote</div>
+    </div>
+    <ul class="btn-list">
+      <li class="btn-item"><span class="btn-num">①</span><div><div class="btn-text" data-i18n="tvBtn1">ON / OFF</div></div></li>
+      <li class="btn-item"><span class="btn-num">②</span><div><div class="btn-text" data-i18n="tvBtn2">Volume</div></div></li>
+      <li class="btn-item"><span class="btn-num">③</span><div><div class="btn-text" data-i18n="tvBtn3">Channel</div></div></li>
+      <li class="btn-item"><span class="btn-num">④</span><div><div class="btn-text" data-i18n="tvBtn4">Input Switching</div></div></li>
+    </ul>
+    <a class="notion-link" href="https://wirehaired-nerine-c7f.notion.site/HOUSE-MANUAL-1a5b54bc854381d9912de226933d45bd" target="_blank">📷 <span data-i18n="photoLink">View photo in House Manual</span></a>
+  </div>
+
+  <!-- AC Remote -->
+  <div class="eq-card">
+    <div class="eq-header">
+      <span class="eq-icon">❄️</span>
+      <div class="eq-title" data-i18n="acTitle">AC Remote</div>
+    </div>
+    <ul class="btn-list">
+      <li class="btn-item"><span class="btn-num">①</span><div><div class="btn-text" data-i18n="acBtn1">ON / OFF</div></div></li>
+      <li class="btn-item"><span class="btn-num">②</span>
+        <div>
+          <div class="btn-text" data-i18n="acBtn2">Mode</div>
+          <div class="btn-sub">暖房 Heater ／ 冷房 Cooler</div>
+        </div>
+      </li>
+      <li class="btn-item"><span class="btn-num">③</span><div><div class="btn-text" data-i18n="acBtn3">Temperature (温度)</div></div></li>
+    </ul>
+    <a class="notion-link" href="https://wirehaired-nerine-c7f.notion.site/HOUSE-MANUAL-1a5b54bc854381d9912de226933d45bd" target="_blank">📷 <span data-i18n="photoLink">View photo in House Manual</span></a>
+  </div>
+
+  <!-- Intercom -->
+  <div class="eq-card">
+    <div class="eq-header">
+      <span class="eq-icon">🔔</span>
+      <div class="eq-title" data-i18n="intercomTitle">Intercom (Doorbell)</div>
+    </div>
+    <ul class="btn-list">
+      <li class="btn-item"><span class="btn-num">①</span><div><div class="btn-text" data-i18n="intercomBtn1">Unlock the door</div></div></li>
+    </ul>
+    <p style="font-size:0.88rem;line-height:1.6;color:var(--text-mid);margin-top:12px;" data-i18n="intercomNote">You can have a conversation with the visitor using the receiver before unlocking.</p>
+    <a class="notion-link" href="https://wirehaired-nerine-c7f.notion.site/HOUSE-MANUAL-1a5b54bc854381d9912de226933d45bd" target="_blank">📷 <span data-i18n="photoLink">View photo in House Manual</span></a>
+  </div>
+
+  <div class="back-footer"><a href="../" data-i18n="backToMenu">← Back to Menu</a></div>
+</div>
+<script>
+const S = {
+  en: { pageTitle:'Equipment', tvTitle:'TV Remote', tvBtn1:'ON / OFF', tvBtn2:'Volume', tvBtn3:'Channel', tvBtn4:'Input Switching', acTitle:'AC Remote', acBtn1:'ON / OFF', acBtn2:'Mode (Heater / Cooler)', acBtn3:'Temperature', intercomTitle:'Intercom (Doorbell)', intercomBtn1:'Unlock the door', intercomNote:'You can speak with the visitor using the receiver before unlocking.', photoLink:'View photo in House Manual', backToMenu:'← Back to Menu' },
+  ja: { pageTitle:'設備について', tvTitle:'テレビリモコン', tvBtn1:'電源 ON / OFF', tvBtn2:'音量', tvBtn3:'チャンネル', tvBtn4:'入力切替', acTitle:'エアコンのリモコン', acBtn1:'電源 ON / OFF', acBtn2:'運転モード切替（暖房 / 冷房）', acBtn3:'温度調節', intercomTitle:'ドアホン（インターホン）', intercomBtn1:'玄関ドアを解錠する', intercomNote:'受話器を使用して、訪問者と会話してから解錠することができます。', photoLink:'ハウスマニュアルで写真を見る', backToMenu:'← メニューへ戻る' },
+  zh: { pageTitle:'设备说明', tvTitle:'电视遥控器', tvBtn1:'开 / 关', tvBtn2:'音量', tvBtn3:'频道', tvBtn4:'输入切换', acTitle:'空调遥控器', acBtn1:'开 / 关', acBtn2:'模式（暖气 / 冷气）', acBtn3:'温度调节', intercomTitle:'对讲机（门铃）', intercomBtn1:'解锁玄关门', intercomNote:'可以使用话筒与访客通话后再开门。', photoLink:'在房屋手册中查看照片', backToMenu:'← 返回菜单' },
+  ko: { pageTitle:'시설 안내', tvTitle:'TV 리모컨', tvBtn1:'전원 ON / OFF', tvBtn2:'볼륨', tvBtn3:'채널', tvBtn4:'입력 전환', acTitle:'에어컨 리모컨', acBtn1:'전원 ON / OFF', acBtn2:'모드 전환（난방 / 냉방）', acBtn3:'온도 조절', intercomTitle:'인터폰（도어벨）', intercomBtn1:'현관문 잠금 해제', intercomNote:'수화기를 사용해 방문자와 대화 후 문을 열 수 있습니다.', photoLink:'하우스 매뉴얼에서 사진 보기', backToMenu:'← 메뉴로 돌아가기' },
+  fr: { pageTitle:'Équipements', tvTitle:'Télécommande TV', tvBtn1:'Marche / Arrêt', tvBtn2:'Volume', tvBtn3:'Chaîne', tvBtn4:'Source d\'entrée', acTitle:'Télécommande Climatiseur', acBtn1:'Marche / Arrêt', acBtn2:'Mode（Chauffage / Climatisation）', acBtn3:'Température', intercomTitle:'Interphone', intercomBtn1:'Déverrouiller la porte', intercomNote:'Vous pouvez parler au visiteur via le combiné avant d\'ouvrir.', photoLink:'Voir la photo dans le manuel', backToMenu:'← Retour au menu' },
+  es: { pageTitle:'Equipamiento', tvTitle:'Mando a distancia TV', tvBtn1:'Encendido / Apagado', tvBtn2:'Volumen', tvBtn3:'Canal', tvBtn4:'Cambio de entrada', acTitle:'Mando a distancia Aire acondicionado', acBtn1:'Encendido / Apagado', acBtn2:'Modo（Calefacción / Refrigeración）', acBtn3:'Temperatura', intercomTitle:'Interfono', intercomBtn1:'Desbloquear la puerta', intercomNote:'Puede hablar con el visitante por el auricular antes de abrir.', photoLink:'Ver foto en el manual de la casa', backToMenu:'← Volver al menú' },
+};
+function setLang(l,btn){document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const t=S[l];if(!t)return;document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(k in t)el.textContent=t[k];});}
+setLang('en',document.querySelector('.lang-btn.active'));
+</script>
 </body>
 </html>

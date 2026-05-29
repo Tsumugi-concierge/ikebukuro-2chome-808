@@ -11,8 +11,32 @@
 <link rel="stylesheet" href="assets/site.css">
 <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs@master/qrcode.min.js" defer></script>
 <style>
+/* ─── Shared extras ─── */
+:root { --r-xl: 22px; --r-md: 16px; --text-dark: #3a3232; --text-mid: #6b5a5a; --shadow-lg: 0 8px 28px rgba(120,80,60,.18); }
+@keyframes slideDown { from{opacity:0;transform:translateY(-14px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+/* ─── Wi-Fi card ─── */
+.wifi-card { margin: 8px 16px 28px; background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%); border-radius: var(--r-xl); padding: 18px 18px 16px; box-shadow: var(--shadow-md); position: relative; overflow: hidden; color: #fff; animation: slideDown 0.5s ease both; }
+.wifi-card::before { content: '📶'; position: absolute; right: -6px; top: -10px; font-size: 84px; opacity: 0.10; transform: rotate(-12deg); }
+.wifi-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.wifi-head-label { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.8); flex: 1; }
+.wifi-head-emoji { font-size: 1.4rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15)); }
+.qr-toggle { border: 1.5px solid rgba(255,255,255,0.35); background: rgba(255,255,255,0.15); border-radius: 999px; padding: 5px 12px; font-family: inherit; font-size: 0.72rem; font-weight: 800; color: #fff; cursor: pointer; letter-spacing: 0.05em; transition: all 0.2s; display: inline-flex; align-items: center; gap: 5px; }
+.qr-toggle:hover { background: rgba(255,255,255,0.28); border-color: rgba(255,255,255,0.6); }
+.wifi-rows { display: flex; flex-direction: column; gap: 8px; }
+.wifi-row { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.22); border-radius: var(--r-md); color: inherit; font-family: inherit; cursor: pointer; text-align: left; transition: background 0.2s; width: 100%; }
+.wifi-row:hover { background: rgba(255,255,255,0.22); }
+.wifi-row.copied { background: rgba(127,255,176,0.35); }
+.wifi-row-label { font-size: 0.66rem; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.75); flex-shrink: 0; min-width: 60px; }
+.wifi-row-val { font-size: 0.98rem; font-weight: 800; flex: 1; letter-spacing: 0.02em; }
+.wifi-row-action { font-size: 1rem; opacity: 0.7; flex-shrink: 0; }
+.wifi-qr { display: none; margin-top: 14px; padding: 16px; background: #fff; border-radius: var(--r-md); text-align: center; animation: fadeIn 0.3s ease; }
+.wifi-qr.visible { display: block; }
+.wifi-qr-hint { font-size: 0.75rem; color: var(--text-mid); margin-top: 8px; font-weight: 700; }
+/* ─── Toast ─── */
+.toast { position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%) translateY(20px); background: var(--text-dark); color: #fff; padding: 10px 18px; border-radius: 999px; font-size: 0.85rem; font-weight: 800; box-shadow: var(--shadow-lg); opacity: 0; pointer-events: none; transition: all 0.3s cubic-bezier(.34,1.56,.64,1); z-index: 200; display: flex; align-items: center; gap: 8px; }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 /* ─── Chat ─── */
-:root { --r-xl: 22px; --text-dark: #3a3232; --text-mid: #6b5a5a; }
 .chat-section { margin: 28px 16px 0; position: relative; }
 .chat-box { background: var(--white); border-radius: var(--r-xl); box-shadow: var(--shadow-md); overflow: hidden; border: 1.5px solid var(--orange-light); }
 .chat-header { background: linear-gradient(135deg, var(--orange) 0%, #e05a28 100%); padding: 14px 18px; display: flex; align-items: center; gap: 12px; position: relative; overflow: hidden; }
@@ -49,6 +73,31 @@
 <body>
 <main>
 <section class="hero"><div class="mark">🏠</div><h1>Ikebukuro 2Chōme808</h1><p>池袋2丁目808</p></section>
+<section class="wifi-card" aria-labelledby="wifi-title">
+    <div class="wifi-head">
+        <span class="wifi-head-emoji" aria-hidden="true">📶</span>
+        <span class="wifi-head-label" id="wifi-title">Wi-Fi</span>
+        <button class="qr-toggle" id="qrToggle" onclick="toggleQR()" aria-expanded="false" aria-controls="wifiQr">
+            <span class="qr-ico">▣</span> QR
+        </button>
+    </div>
+    <div class="wifi-rows">
+        <button class="wifi-row" onclick="copyWifi(this, 'TP-Link_076B_5G')" aria-label="Copy network name">
+            <span class="wifi-row-label">Network</span>
+            <span class="wifi-row-val">TP-Link_076B_5G</span>
+            <span class="wifi-row-action" aria-hidden="true">⧉</span>
+        </button>
+        <button class="wifi-row" onclick="copyWifi(this, '40110981')" aria-label="Copy password">
+            <span class="wifi-row-label">Password</span>
+            <span class="wifi-row-val">40110981</span>
+            <span class="wifi-row-action" aria-hidden="true">⧉</span>
+        </button>
+    </div>
+    <div class="wifi-qr" id="wifiQr">
+        <img id="wifiQrImg" alt="Wi-Fi QR code" width="200" height="200">
+        <p class="wifi-qr-hint">Scan with your camera to connect</p>
+    </div>
+</section>
 <nav class="menu" aria-label="Guest menu"><div class="menu-group"><div class="menu-group-head"><span class="menu-group-title">Arriving</span><span class="menu-group-line"></span></div><div class="btn-grid"><a href="access/" class="pl-btn"><span class="pl-icon-wrap"><span class="pl-icon" aria-hidden="true">🏠</span></span><span class="pl-en">Route to Accommodations</span><span class="pl-ja">宿泊施設へのルート</span></a>
 <a href="taxi/" class="pl-btn"><span class="pl-icon-wrap"><span class="pl-icon" aria-hidden="true">🚕</span></span><span class="pl-en">By Taxi</span><span class="pl-ja">タクシーをご利用の場合</span></a>
 <a href="how-to-open/" class="pl-btn"><span class="pl-icon-wrap"><span class="pl-icon" aria-hidden="true">🔑</span></span><span class="pl-en">How to Open</span><span class="pl-ja">鍵の開け方</span></a>
@@ -85,6 +134,7 @@
     </div>
 </section>
 </main>
+<div class="toast" id="toast" role="status" aria-live="polite"><span aria-hidden="true">✓</span><span id="toastText">Copied!</span></div>
 <script>
 const CONFIG = {
     workerUrl: 'https://concierge.info-tsumugi4.workers.dev',
@@ -163,6 +213,53 @@ function askChip(btn) {
 document.getElementById('chatInput').addEventListener('keydown', e => {
     if (e.key === 'Enter' && !e.isComposing) sendMessage();
 });
+
+/* ── Wi-Fi ── */
+async function copyWifi(btn, text) {
+    try { await navigator.clipboard.writeText(text); } catch {
+        const ta = document.createElement('textarea');
+        ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); } catch {} ta.remove();
+    }
+    btn.classList.add('copied');
+    setTimeout(() => btn.classList.remove('copied'), 900);
+    showToast(LANG_DATA[currentLang]?.copied || 'Copied!');
+}
+function showToast(msg) {
+    const t = document.getElementById('toast');
+    document.getElementById('toastText').textContent = msg;
+    t.classList.add('show');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(() => t.classList.remove('show'), 1800);
+}
+let qrRendered = false;
+function wifiQrString() {
+    const esc = s => String(s).replace(/([\\;,":])/g, '\\$1');
+    return 'WIFI:T:WPA;S:' + esc('TP-Link_076B_5G') + ';P:' + esc('40110981') + ';;';
+}
+function toggleQR() {
+    const panel = document.getElementById('wifiQr');
+    const btn = document.getElementById('qrToggle');
+    const open = !panel.classList.contains('visible');
+    panel.classList.toggle('visible', open);
+    btn.setAttribute('aria-expanded', String(open));
+    if (open && !qrRendered) renderQR();
+}
+function renderQR() {
+    const img = document.getElementById('wifiQrImg');
+    const payload = wifiQrString();
+    if (typeof QRCode !== 'undefined') {
+        try {
+            const tmp = document.createElement('div');
+            new QRCode(tmp, { text: payload, width: 200, height: 200, correctLevel: QRCode.CorrectLevel.M });
+            const canvas = tmp.querySelector('canvas');
+            if (canvas) { img.src = canvas.toDataURL('image/png'); qrRendered = true; return; }
+        } catch {}
+    }
+    img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' + encodeURIComponent(payload);
+    qrRendered = true;
+}
 </script>
 </body>
 </html>

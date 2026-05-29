@@ -82,14 +82,14 @@
         </button>
     </div>
     <div class="wifi-rows">
-        <button class="wifi-row" onclick="copyWifi(this, 'TP-Link_076B_5G')" aria-label="Copy network name">
+        <button class="wifi-row" onclick="copyWifi(this, 'TP-Link_E61A_5G')" aria-label="Copy network name">
             <span class="wifi-row-label">Network</span>
-            <span class="wifi-row-val">TP-Link_076B_5G</span>
+            <span class="wifi-row-val">TP-Link_E61A_5G</span>
             <span class="wifi-row-action" aria-hidden="true">⧉</span>
         </button>
-        <button class="wifi-row" onclick="copyWifi(this, '40110981')" aria-label="Copy password">
+        <button class="wifi-row" onclick="copyWifi(this, '31260602')" aria-label="Copy password">
             <span class="wifi-row-label">Password</span>
-            <span class="wifi-row-val">40110981</span>
+            <span class="wifi-row-val">31260602</span>
             <span class="wifi-row-action" aria-hidden="true">⧉</span>
         </button>
     </div>
@@ -147,7 +147,7 @@ const CONFIG = {
     },
 };
 
-const WIFI = { ssid: 'TP-Link_076B_5G', password: '40110981', type: 'WPA' };
+const WIFI = { ssid: 'TP-Link_E61A_5G', password: '31260602', type: 'WPA' };
 
 let currentLang = 'en';
 let history = [];
@@ -236,7 +236,7 @@ function showToast(msg) {
 let qrRendered = false;
 function wifiQrString() {
     const esc = s => String(s).replace(/([\\;,":])/g, '\\$1');
-    return 'WIFI:T:WPA;S:' + esc('TP-Link_076B_5G') + ';P:' + esc('40110981') + ';;';
+    return 'WIFI:T:WPA;S:' + esc('TP-Link_E61A_5G') + ';P:' + esc('31260602') + ';;';
 }
 function toggleQR() {
     const panel = document.getElementById('wifiQr');

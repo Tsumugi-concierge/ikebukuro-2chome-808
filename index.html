@@ -18,12 +18,12 @@
 /* ─── Wi-Fi card ─── */
 .wifi-card { margin: 8px 16px 28px; background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%); border-radius: var(--r-xl); padding: 18px 18px 16px; box-shadow: var(--shadow-md); position: relative; overflow: hidden; color: #fff; animation: slideDown 0.5s ease both; }
 .wifi-card::before { content: '📶'; position: absolute; right: -6px; top: -10px; font-size: 84px; opacity: 0.10; transform: rotate(-12deg); pointer-events: none; }
-.wifi-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.wifi-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; position: relative; z-index: 1; }
 .wifi-head-label { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.8); flex: 1; }
 .wifi-head-emoji { font-size: 1.4rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15)); }
 .qr-toggle { border: 1.5px solid rgba(255,255,255,0.35); background: rgba(255,255,255,0.15); border-radius: 999px; padding: 5px 12px; font-family: inherit; font-size: 0.72rem; font-weight: 800; color: #fff; cursor: pointer; letter-spacing: 0.05em; transition: all 0.2s; display: inline-flex; align-items: center; gap: 5px; }
 .qr-toggle:hover { background: rgba(255,255,255,0.28); border-color: rgba(255,255,255,0.6); }
-.wifi-rows { display: flex; flex-direction: column; gap: 8px; }
+.wifi-rows { display: flex; flex-direction: column; gap: 8px; position: relative; z-index: 1; }
 .wifi-row { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.22); border-radius: var(--r-md); color: inherit; font-family: inherit; cursor: pointer; text-align: left; transition: background 0.2s; width: 100%; }
 .wifi-row:hover { background: rgba(255,255,255,0.22); }
 .wifi-row.copied { background: rgba(127,255,176,0.35); }

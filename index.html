@@ -17,7 +17,7 @@
 @keyframes fadeIn { from{opacity:0} to{opacity:1} }
 /* ─── Wi-Fi card ─── */
 .wifi-card { margin: 8px 16px 28px; background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%); border-radius: var(--r-xl); padding: 18px 18px 16px; box-shadow: var(--shadow-md); position: relative; overflow: hidden; color: #fff; animation: slideDown 0.5s ease both; }
-.wifi-card::before { content: '📶'; position: absolute; right: -6px; top: -10px; font-size: 84px; opacity: 0.10; transform: rotate(-12deg); }
+.wifi-card::before { content: '📶'; position: absolute; right: -6px; top: -10px; font-size: 84px; opacity: 0.10; transform: rotate(-12deg); pointer-events: none; }
 .wifi-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
 .wifi-head-label { font-size: 0.72rem; font-weight: 900; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.8); flex: 1; }
 .wifi-head-emoji { font-size: 1.4rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15)); }

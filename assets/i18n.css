@@ -1,0 +1,14 @@
+/* Global i18n visibility control */
+.lang-en,.lang-ja,.lang-zh,.lang-ko,.lang-fr,.lang-es{display:none}
+.show-en .lang-en{display:initial}
+.show-ja .lang-ja{display:initial}
+.show-zh .lang-zh{display:initial}
+.show-ko .lang-ko{display:initial}
+.show-fr .lang-fr{display:initial}
+.show-es .lang-es{display:initial}
+
+/* Language switcher (injected if a page doesn't have one) */
+.i18n-lang-bar{display:flex;justify-content:center;gap:6px;padding:10px 16px;flex-wrap:wrap;background:var(--cream,#fdf6ee);}
+.i18n-lang-btn{border:2px solid rgba(212,101,30,0.25);background:rgba(255,255,255,0.92);backdrop-filter:blur(6px);border-radius:50px;padding:4px 9px;font-family:Nunito,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;font-size:0.72rem;font-weight:800;color:var(--text-mid,#6b5a5a);cursor:pointer;transition:all .2s;box-shadow:0 2px 8px rgba(120,80,60,0.12)}
+.i18n-lang-btn.active{background:#d4651e;border-color:#d4651e;color:#fff}
+.i18n-lang-btn:hover:not(.active){border-color:#d4651e;color:#d4651e}
